@@ -31,10 +31,10 @@ RUN gem install foreman
 
 # Configure NGINX
 COPY install-nginx.sh /tmp/install-nginx.sh
-RUN /tmp/install-nginx.sh && \
-    cp config/nginx.sample.conf /etc/nginx/conf.d/discourse.conf && \
-    sed -i "s/^  server_name enter\.your\.web\.hostname\.here;/  server_name $DISCOURSE_HOSTNAME;/" /etc/nginx/conf.d/discourse.conf && \
-    mkdir -p /var/nginx/cache/
+RUN /tmp/install-nginx.sh
+RUN cp config/nginx.sample.conf /etc/nginx/conf.d/discourse.conf
+RUN sed -i "s/^  server_name enter\.your\.web\.hostname\.here;/  server_name $DISCOURSE_HOSTNAME;/" /etc/nginx/conf.d/discourse.conf
+RUN mkdir -p /var/nginx/cache/
 
 # Install Redis
 COPY install-redis.sh /tmp/install-redis.sh
